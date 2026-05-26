@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" id="htmlRoot">
 <head>
 <meta charset="UTF-8"/>
+<link rel="preconnect" href="https://images.unsplash.com"/>
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=1200&q=85&fit=crop&crop=center" fetchpriority="high"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AURA — Luxury Perfume & Fragrance Oils</title>
+<title>AURA — Parfums de Luxe &amp; Huiles de Parfum</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+@keyframes bodyFadeIn{from{opacity:0}to{opacity:1}}
 :root{
   --gold:#B8934A;
   --gold2:#D4AA6A;
@@ -24,13 +27,11 @@
   --ease:cubic-bezier(0.25,0.46,0.45,0.94);
 }
 html{scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;cursor:none}
+body{animation:bodyFadeIn .5s ease both;
+font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;cursor:none}
 
 /* ── CURSOR ── */
-#cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(184,147,74,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .35s var(--ease),height .35s var(--ease)}
-.cx #cursor{width:46px;height:46px;background:rgba(184,147,74,.2)}
-.cx #cursor-ring{width:60px;height:60px}
+@media(pointer:fine){#cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s}.cx #cursor{width:40px;height:40px;background:rgba(184,147,74,.15)}}
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:3px}
@@ -138,11 +139,10 @@ nav{
 .hero-right img{
   width:100%;height:100%;object-fit:cover;
   filter:brightness(.55) saturate(.8);
-  transform:scale(1.06);
-  animation:heroZoom 14s var(--ease) forwards;
+  transform:scale(1);
   display:block;
 }
-@keyframes heroZoom{to{transform:scale(1)}}
+
 .hero-right-overlay{
   position:absolute;inset:0;
   background:linear-gradient(to right,var(--dark) 0%,transparent 40%);
@@ -233,12 +233,7 @@ nav{
   background:var(--gold);color:#fff;padding:.3rem .65rem;border-radius:1px;
   font-family:'Jost',sans-serif;font-weight:500;
 }
-.prod-badge-sale{
-  position:absolute;top:.8rem;left:.8rem;
-  font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
-  background:#C0392B;color:#fff;padding:.3rem .65rem;border-radius:1px;
-  font-family:'Jost',sans-serif;font-weight:500;
-}
+
 .prod-overlay{
   position:absolute;inset:0;
   background:rgba(12,10,8,.65);
@@ -263,7 +258,7 @@ nav{
 .prod-stars{display:none}
 .prod-price-row{display:flex;align-items:center;gap:.6rem}
 .prod-price{font-size:.95rem;color:var(--gold);font-weight:600;letter-spacing:.03em}
-.prod-price-old{font-size:.8rem;color:var(--muted);text-decoration:line-through}
+
 
 /* ════════════════════════
    OILS SECTION
@@ -444,17 +439,7 @@ footer{
 .footer-bottom-links a:hover{color:var(--gold)}
 
 /* ── LOADER ── */
-#loader{
-  position:fixed;inset:0;background:var(--dark);z-index:9999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;
-  transition:opacity .8s,visibility .8s;
-}
-#loader.done{opacity:0;visibility:hidden}
-.loader-logo{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:.45em;color:var(--gold);opacity:0;animation:fadeIn .8s .3s forwards}
-@keyframes fadeIn{to{opacity:1}}
-.loader-bar-bg{width:180px;height:1px;background:rgba(255,255,255,.08)}
-.loader-bar-fill{height:100%;background:var(--gold);width:0;animation:loadFill 1.5s var(--ease) forwards}
-@keyframes loadFill{to{width:100%}}
+
 
 /* ── SCROLL REVEAL ── */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -477,9 +462,9 @@ footer{
   .nav-links{display:none}
   .nav-search{display:none}
   .hamburger{display:flex}
-  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero{grid-template-columns:1fr;min-height:90vh;background-size:cover;background-position:center}
   .hero-left{padding:7rem 1.8rem 3rem}
-  .hero-right{height:260px;min-height:260px}
+  .hero-right{display:none}
   .hero-badge{display:none}
   .products-grid{grid-template-columns:repeat(2,1fr)}
   .oils-grid{grid-template-columns:repeat(2,1fr)}
@@ -771,16 +756,14 @@ footer{
   nav{padding:.7rem 1rem}
   .nav-logo{font-size:1.1rem;letter-spacing:.2em}
   .nav-search{display:none}
-  .nav-cta{display:none}
-  .topbar{display:none}
-  .hero-scroll-indicator{display:none}
+  .nav-cta{display:none}  .hero-scroll-indicator{display:none}
 
   /* Hero */
-  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero{grid-template-columns:1fr;min-height:90vh;background-size:cover;background-position:center}
   .hero-left{padding:5.5rem 1.2rem 2rem}
   .hero-title{font-size:2.4rem}
   .hero-sub{font-size:.82rem}
-  .hero-right{height:220px;min-height:220px}
+  .hero-right{display:none}
   .hero-badge{display:none}
   .hero-btns{flex-direction:column;align-items:flex-start}
   .btn-gold,.btn-outline-light{padding:.8rem 1.6rem;font-size:.65rem}
@@ -830,7 +813,7 @@ footer{
   .cart-item-notes{display:none}
 
   /* Promo content */
-  .promo-content{padding:2rem 1.2rem}
+  
 
   /* See all btn */
   .btn-see-all{font-size:.65rem;padding:.8rem 1.5rem}
@@ -983,25 +966,145 @@ footer{
   font-size:.82rem;color:var(--muted);
 }
 .search-no-results span{display:block;font-size:1.4rem;margin-bottom:.5rem;opacity:.4}
+
+/* ════════════════════════
+   LANGUAGE TOGGLE
+════════════════════════ */
+.lang-toggle{
+  display:flex;align-items:center;gap:0;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:50px;overflow:hidden;
+  flex-shrink:0;
+}
+.lang-btn{
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;background:transparent;color:rgba(255,255,255,.45);
+  border:none;padding:.38rem .75rem;cursor:none;
+  transition:background .25s,color .25s;
+  line-height:1;
+}
+.lang-btn.active{background:var(--gold);color:#fff;}
+.lang-btn:hover:not(.active){color:rgba(255,255,255,.8)}
+
+
+
+  .hero-left{padding:6rem 1rem 2.5rem}
+
+
+
+/* Mobile spacing */
+@media(max-width:600px){
+  .featured{padding:2.5rem 1rem 3rem}
+  .oils-section{padding:2.5rem 1rem}
+  .testi-section{padding:2.5rem 1rem}
+  .wa-section{padding:2.5rem 1.2rem}
+  .about-strip{padding:2.5rem 1rem;gap:2rem;grid-template-columns:1fr}
+  nav{padding:.7rem 1rem}  .hero-scroll-indicator{display:none}
+  footer{padding:2rem 1rem 0}
+  .footer-top{gap:1.5rem}
+}
+
+
+
+
+
+
+
+
+/* ═══════════════════════════
+   MOBILE HERO — bg image
+═══════════════════════════ */
+@media(max-width:900px){
+  .hero{
+    display:block !important;
+    min-height:94vh;
+    background:url('https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=900&q=75&fit=crop&crop=center') center/cover no-repeat !important;
+    position:relative;
+  }
+  .hero::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(150deg,rgba(12,10,8,.92) 0%,rgba(12,10,8,.55) 55%,rgba(12,10,8,.85) 100%);
+    pointer-events:none;z-index:0;
+  }
+  .hero-left{position:relative;z-index:1;padding:7rem 1.5rem 3.5rem}
+  .hero-right{display:none !important}
+  .hero-scroll-indicator{display:none !important}
+}
+@media(max-width:600px){
+  .hero{min-height:100svh}
+  .hero-left{padding:5.5rem 1.1rem 3rem}
+  .hero-title{font-size:2.6rem;line-height:1.0}
+  .hero-sub{font-size:.83rem}
+  .hero-btns{flex-wrap:wrap;gap:.7rem}
+  .btn-gold,.btn-outline-light{padding:.8rem 1.5rem;font-size:.64rem;width:100%}
+}
+@media(max-width:400px){
+  .hero-title{font-size:2.1rem}
+  .hero-left{padding:5rem 1rem 2.5rem}
+}
+
+/* ═══════════════════════════
+   SPACING
+═══════════════════════════ */
+.about-strip{padding:5rem 3.5rem}
+.featured{padding:5rem 3.5rem 5.5rem}
+.oils-section{padding:5rem 3.5rem}
+.testi-section{padding:5rem 3.5rem}
+.wa-section{padding:5rem 3.5rem}
+.process{padding:5rem 3.5rem}
+.oils-grid{gap:1.2rem}
+.testi-grid{gap:1.2rem}
+.cat-oils-grid{gap:1rem}
+.section-head,.featured-header{margin-bottom:3rem}
+.tabs{margin-bottom:2.5rem}
+.see-all-wrap{margin-top:2.5rem}
+.prod-info{padding:1rem 1.1rem 1.3rem}
+.oil-info{padding:.9rem 1rem 1rem}
+@media(max-width:1100px){
+  .about-strip,.featured,.oils-section,.testi-section,.wa-section,.process{padding:4rem 2.5rem}
+}
+@media(max-width:900px){
+  .about-strip,.featured,.oils-section,.testi-section,.wa-section,.process{padding:3.5rem 1.8rem}
+  footer{padding:3rem 1.8rem 0}
+  .footer-top{gap:2rem}
+  .about-strip{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:600px){
+  .about-strip,.featured,.oils-section,.testi-section,.wa-section,.process{padding:2.8rem 1.1rem}
+  footer{padding:2.5rem 1.1rem 0}
+  .topbar{display:none !important}
+  nav{padding:.7rem 1rem !important}
+  .products-grid{gap:.7rem}
+  .oils-grid,.testi-grid{gap:.7rem}
+  .footer-top{gap:1.5rem}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){
+  .footer-top{grid-template-columns:1fr}
+}
+
+/* ═══════════════════════════
+   LAZY IMAGE PLACEHOLDER
+═══════════════════════════ */
+img[data-src]{
+  background:linear-gradient(135deg,#f0ede8,#e5e0d8);
+  min-height:60px;
+}
+img[data-src].loaded{background:none}
+
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-logo">AURA</div>
-  <div class="loader-bar-bg"><div class="loader-bar-fill"></div></div>
-</div>
-
-<!-- CUSTOM CURSOR -->
+<!-- CUSTOM CURSOR (desktop only) -->
 <div id="cursor"></div>
-<div id="cursor-ring"></div>
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <span>✦ Free Delivery on Orders Over <b>20.000 FCFA</b></span>
-  <span>✦ New Arrivals Every Week</span>
-  <span>✦ Authentic Luxury Fragrances</span>
+  <span>✦ Livraison gratuite dès <b>20.000 FCFA</b></span>
+  <span>✦ Nouvelles arrivées chaque semaine</span>
+  <span>✦ Parfums de luxe authentiques</span>
 </div>
 
 <!-- NAV -->
@@ -1009,14 +1112,14 @@ footer{
   <a href="#" class="nav-logo">AURA</a>
   <ul class="nav-links">
     <li><a href="#featured">Collections</a></li>
-    <li><a href="#oils">Oils</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#oils">Huiles</a></li>
+    <li><a href="#about">À propos</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
     <div class="nav-search" style="position:relative">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="navSearchInput" placeholder="Search product…" autocomplete="off"/>
+      <input type="text" id="navSearchInput" placeholder="Rechercher un parfum…" autocomplete="off"/>
       <div class="search-dropdown" id="searchDropdown">
         <div class="search-dropdown-head" id="searchDropdownHead">Results</div>
         <div class="search-dropdown-list" id="searchDropdownList"></div>
@@ -1026,7 +1129,8 @@ footer{
       <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span class="cart-count" id="cartCount">0</span>
     </button>
-    <button class="nav-cta">Shop Now</button>
+    <div class="lang-toggle"><button class="lang-btn active" id="btnFR" onclick="setLang('fr')">FR</button><button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button></div>
+    <button class="nav-cta" data-fr="Commander" data-en="Shop Now">Commander</button>
     <button class="hamburger" id="burgerBtn" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1034,22 +1138,22 @@ footer{
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <a href="#featured">Collections</a>
-  <a href="#oils">Oils</a>
-  <a href="#about">About</a>
+  <a href="#oils">Huiles</a>
+  <a href="#about">À propos</a>
   <a href="#contact">Contact</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
   <div class="hero-left">
-    <p class="hero-eyebrow">New Collection 2026</p>
+    <p class="hero-eyebrow">Nouvelle Collection 2026</p>
     <h1 class="hero-title">
       The Art<br>of <em>Scent</em><br>Perfected
     </h1>
-    <p class="hero-sub">Rare perfumes and hand-crafted fragrance oils for those who leave a room smelling like a memory worth keeping.</p>
+    <p class="hero-sub">Parfums rares et huiles de parfum artisanales pour ceux qui laissent une pièce parfumée comme un souvenir inoubliable.</p>
     <div class="hero-btns">
-      <button class="btn-gold">Explore Collection</button>
-      <button class="btn-outline-light">Find Your Scent</button>
+      <button class="btn-gold">Explorer la Collection</button>
+      <button class="btn-outline-light">Trouver Votre Parfum</button>
     </div>
   </div>
   <div class="hero-right">
@@ -1058,7 +1162,7 @@ footer{
   </div>
   <div class="hero-scroll-indicator">
     <div class="scroll-bar"></div>
-    <span>Scroll</span>
+    <span>Défiler</span>
   </div>
 </section>
 
@@ -1066,14 +1170,14 @@ footer{
 <div class="marquee-strip">
   <div class="marquee-inner">
     <span>Eau de Parfum</span><span class="sep">✦</span>
-    <span>Fragrance Oils</span><span class="sep">✦</span>
+    <span>Huiles de Parfum</span><span class="sep">✦</span>
     <span>Oud & Amber</span><span class="sep">✦</span>
     <span>Floral Bouquets</span><span class="sep">✦</span>
     <span>Oriental Woods</span><span class="sep">✦</span>
     <span>Limited Editions</span><span class="sep">✦</span>
     <span>Bespoke Blends</span><span class="sep">✦</span>
     <span>Eau de Parfum</span><span class="sep">✦</span>
-    <span>Fragrance Oils</span><span class="sep">✦</span>
+    <span>Huiles de Parfum</span><span class="sep">✦</span>
     <span>Oud & Amber</span><span class="sep">✦</span>
     <span>Floral Bouquets</span><span class="sep">✦</span>
     <span>Oriental Woods</span><span class="sep">✦</span>
@@ -1085,13 +1189,13 @@ footer{
 <!-- ═══ FEATURED PRODUCTS ═══ -->
 <section class="featured" id="featured">
   <div class="featured-header reveal">
-    <h2>Featured Products</h2>
+    <h2>Produits Vedettes</h2>
     <div class="underline"></div>
   </div>
   <div class="tabs reveal">
-    <button class="tab-btn active" data-tab="women">Women</button>
-    <button class="tab-btn" data-tab="men">Men</button>
-    <button class="tab-btn" data-tab="sets">Value & Gift Sets</button>
+    <button class="tab-btn active" data-tab="women">Femmes</button>
+    <button class="tab-btn" data-tab="men">Hommes</button>
+    <button class="tab-btn" data-tab="sets">Value & Coffrets</button>
   </div>
 
   <!-- WOMEN TAB -->
@@ -1099,14 +1203,14 @@ footer{
     <!-- Card 1 -->
     <div class="prod-card reveal">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=500&q=85&fit=crop" alt="Rose Velvet"/>
-        <span class="prod-badge-new">New</span>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=500&q=85&fit=crop" alt="Rose Velvet"/>
+        <span class="prod-badge-new">Nouveau</span>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Floral Collection</p>
+        <p class="prod-info-brand">Collection Florale</p>
         <h3 class="prod-info-name">Rose Velvet</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1123,13 +1227,13 @@ footer{
     <!-- Card 2 -->
     <div class="prod-card reveal reveal-d1">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=500&q=85&fit=crop" alt="Soleil d'Or"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=500&q=85&fit=crop" alt="Soleil d'Or"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Solar Collection</p>
+        <p class="prod-info-brand">Collection Solaire</p>
         <h3 class="prod-info-name">Soleil d'Or</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1146,14 +1250,13 @@ footer{
     <!-- Card 3 -->
     <div class="prod-card reveal reveal-d2">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=500&q=85&fit=crop" alt="La Fleur"/>
-        <span class="prod-badge-sale">-20%</span>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=500&q=85&fit=crop" alt="La Fleur"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Bloom Collection</p>
+        <p class="prod-info-brand">Collection Bloom</p>
         <h3 class="prod-info-name">La Fleur Intense</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1164,20 +1267,19 @@ footer{
         </div>
         <div class="prod-price-row">
           <span class="prod-price">5.000 FCFA</span>
-          <span class="prod-price-old">5.000 FCFA</span>
         </div>
       </div>
     </div>
     <!-- Card 4 -->
     <div class="prod-card reveal reveal-d3">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500&q=85&fit=crop" alt="Velvet Noir"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500&q=85&fit=crop" alt="Velvet Noir"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Noir Edition</p>
+        <p class="prod-info-brand">Édition Noire</p>
         <h3 class="prod-info-name">Velvet Noir</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1194,14 +1296,13 @@ footer{
     <!-- Row 2 -->
     <div class="prod-card reveal">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=500&q=85&fit=crop" alt="Jasmine Dreams"/>
-        <span class="prod-badge-sale">-38%</span>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=500&q=85&fit=crop" alt="Jasmine Dreams"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Blossom</p>
+        <p class="prod-info-brand">Fleurs</p>
         <h3 class="prod-info-name">Jasmine Dreams</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1212,19 +1313,18 @@ footer{
         </div>
         <div class="prod-price-row">
           <span class="prod-price">5.000 FCFA</span>
-          <span class="prod-price-old">5.000 FCFA</span>
         </div>
       </div>
     </div>
     <div class="prod-card reveal reveal-d1">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=500&q=85&fit=crop" alt="Midnight Orchid"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=500&q=85&fit=crop" alt="Midnight Orchid"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Dark Florals</p>
+        <p class="prod-info-brand">Floraux Sombres</p>
         <h3 class="prod-info-name">Midnight Orchid</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1240,14 +1340,13 @@ footer{
     </div>
     <div class="prod-card reveal reveal-d2">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&q=85&fit=crop" alt="Amber Silk"/>
-        <span class="prod-badge-sale">-41%</span>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&q=85&fit=crop" alt="Amber Silk"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Amber Series</p>
+        <p class="prod-info-brand">Série Ambrée</p>
         <h3 class="prod-info-name">Amber Silk</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1258,19 +1357,18 @@ footer{
         </div>
         <div class="prod-price-row">
           <span class="prod-price">5.000 FCFA</span>
-          <span class="prod-price-old">5.000 FCFA</span>
         </div>
       </div>
     </div>
     <div class="prod-card reveal reveal-d3">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=500&q=85&fit=crop" alt="Crystal Mist"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=500&q=85&fit=crop" alt="Crystal Mist"/>
         <div class="prod-overlay">
-          <button class="overlay-btn">Add to Cart</button>
+          <button class="overlay-btn">Ajouter au Panier</button>
         </div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Aqua Series</p>
+        <p class="prod-info-brand">Série Aqua</p>
         <h3 class="prod-info-name">Crystal Mist</h3>
         <div class="prod-stars">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
@@ -1290,12 +1388,12 @@ footer{
   <div class="products-grid tab-panel" id="tab-men" style="display:none">
     <div class="prod-card reveal">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=500&q=85&fit=crop" alt="Noir Intense"/>
-        <span class="prod-badge-new">New</span>
-        <div class="prod-overlay"><button class="overlay-btn">Add to Cart</button></div>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=500&q=85&fit=crop" alt="Noir Intense"/>
+        <span class="prod-badge-new">Nouveau</span>
+        <div class="prod-overlay"><button class="overlay-btn">Ajouter au Panier</button></div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Oud Collection</p>
+        <p class="prod-info-brand">Collection Oud</p>
         <h3 class="prod-info-name">Noir Intense</h3>
         <div class="prod-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
         <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span></div>
@@ -1303,11 +1401,11 @@ footer{
     </div>
     <div class="prod-card reveal reveal-d1">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=500&q=85&fit=crop" alt="Dark Cedar"/>
-        <div class="prod-overlay"><button class="overlay-btn">Add to Cart</button></div>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=500&q=85&fit=crop" alt="Dark Cedar"/>
+        <div class="prod-overlay"><button class="overlay-btn">Ajouter au Panier</button></div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Wood Series</p>
+        <p class="prod-info-brand">Série Bois</p>
         <h3 class="prod-info-name">Dark Cedar</h3>
         <div class="prod-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
         <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span></div>
@@ -1315,25 +1413,24 @@ footer{
     </div>
     <div class="prod-card reveal reveal-d2">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=500&q=85&fit=crop" alt="Vetiver Smoke"/>
-        <span class="prod-badge-sale">-25%</span>
-        <div class="prod-overlay"><button class="overlay-btn">Add to Cart</button></div>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=500&q=85&fit=crop" alt="Vetiver Smoke"/>
+        <div class="prod-overlay"><button class="overlay-btn">Ajouter au Panier</button></div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Smoke Series</p>
+        <p class="prod-info-brand">Série Fumée</p>
         <h3 class="prod-info-name">Vetiver Smoke</h3>
         <div class="prod-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-        <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span><span class="prod-price-old">5.000 FCFA</span></div>
+        <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span></div>
       </div>
     </div>
     <div class="prod-card reveal reveal-d3">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=500&q=85&fit=crop" alt="Sandalwood Reserve"/>
-        <div class="prod-overlay"><button class="overlay-btn">Add to Cart</button></div>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=500&q=85&fit=crop" alt="Sandalwood Réserve"/>
+        <div class="prod-overlay"><button class="overlay-btn">Ajouter au Panier</button></div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Reserve</p>
-        <h3 class="prod-info-name">Sandalwood Reserve</h3>
+        <p class="prod-info-brand">Réserve</p>
+        <h3 class="prod-info-name">Sandalwood Réserve</h3>
         <div class="prod-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
         <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span></div>
       </div>
@@ -1344,24 +1441,24 @@ footer{
   <div class="products-grid tab-panel" id="tab-sets" style="display:none">
     <div class="prod-card reveal">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=500&q=85&fit=crop" alt="Discovery Set"/>
-        <span class="prod-badge-new">Gift</span>
-        <div class="prod-overlay"><button class="overlay-btn">Add to Cart</button></div>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=500&q=85&fit=crop" alt="Discovery Set"/>
+        <span class="prod-badge-new">Cadeau</span>
+        <div class="prod-overlay"><button class="overlay-btn">Ajouter au Panier</button></div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Gift Sets</p>
+        <p class="prod-info-brand">Coffrets</p>
         <h3 class="prod-info-name">Discovery Set · 5pc</h3>
         <div class="prod-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-        <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span><span class="prod-price-old">5.000 FCFA</span></div>
+        <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span></div>
       </div>
     </div>
     <div class="prod-card reveal reveal-d1">
       <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=500&q=85&fit=crop" alt="Luxury Duo"/>
-        <div class="prod-overlay"><button class="overlay-btn">Add to Cart</button></div>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=500&q=85&fit=crop" alt="Luxury Duo"/>
+        <div class="prod-overlay"><button class="overlay-btn">Ajouter au Panier</button></div>
       </div>
       <div class="prod-info">
-        <p class="prod-info-brand">Gift Sets</p>
+        <p class="prod-info-brand">Coffrets</p>
         <h3 class="prod-info-name">Luxury Duo</h3>
         <div class="prod-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
         <div class="prod-price-row"><span class="prod-price">5.000 FCFA</span></div>
@@ -1373,20 +1470,20 @@ footer{
 <!-- ═══ FRAGRANCE OILS ═══ -->
 <section class="oils-section" id="oils">
   <div class="section-head reveal">
-    <h2>Fragrance Oils</h2>
+    <h2>Huiles de Parfum</h2>
     <div class="underline"></div>
-    <p class="section-sub">All fragrance oils — 5.000 FCFA · Alcohol-free</p>
+    <p class="section-sub">Toutes les huiles de parfum — 5.000 FCFA · Sans alcool</p>
   </div>
   <div class="oils-grid">
     
     <div class="oil-card reveal">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=85&fit=crop" alt="His Confession"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=85&fit=crop" alt="His Confession"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">His Confession</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1395,12 +1492,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d1">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=85&fit=crop" alt="Her Confession"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=85&fit=crop" alt="Her Confession"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Her Confession</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1409,12 +1506,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d2">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=85&fit=crop" alt="Guc by Cuc"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=85&fit=crop" alt="Guc by Cuc"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Guc by Cuc</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1423,12 +1520,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d3">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=85&fit=crop" alt="Noir"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=85&fit=crop" alt="Noir"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Noir</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1437,12 +1534,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d0">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=85&fit=crop" alt="Organza"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=85&fit=crop" alt="Organza"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Organza</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1451,12 +1548,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d1">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=85&fit=crop" alt="Oud for Greatness"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=85&fit=crop" alt="Oud for Greatness"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Oud for Greatness</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1465,12 +1562,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d2">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=85&fit=crop" alt="Rayhaan Crimson"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=85&fit=crop" alt="Rayhaan Crimson"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Rayhaan Crimson</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1479,12 +1576,12 @@ footer{
     </div>
     <div class="oil-card reveal reveal-d3">
       <div class="oil-img">
-        <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=85&fit=crop" alt="Poison Girl"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=85&fit=crop" alt="Poison Girl"/>
         <span class="oil-tag">5.000 FCFA</span>
       </div>
       <div class="oil-info">
         <h3 class="oil-name">Poison Girl</h3>
-        <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+        <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
         <div class="oil-footer">
           <span class="oil-price">5.000 FCFA</span>
           <button class="oil-add" aria-label="Add to cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -1494,7 +1591,7 @@ footer{
   </div>
   <div class="see-all-wrap reveal">
     <button class="btn-see-all" id="btnSeeAll">
-      See All 99 Fragrances
+      Voir les 99 Parfums
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
   </div>
@@ -1507,12 +1604,12 @@ footer{
     <div class="cat-page-head">
       <div>
         <div class="cat-page-logo">AURA</div>
-        <h2 class="cat-page-title">Complete Fragrance Catalogue</h2>
-        <p class="cat-page-sub">All 99 oils · 5.000 FCFA each · Alcohol-free</p>
+        <h2 class="cat-page-title">Catalogue Complet de Parfums</h2>
+        <p class="cat-page-sub">99 huiles · 5.000 FCFA chacune · Sans alcool</p>
       </div>
       <div style="display:flex;align-items:center;gap:1rem">
         <button class="btn-gold" id="catViewCart" style="padding:.6rem 1.2rem;font-size:.62rem;white-space:nowrap">
-          View Cart (<span id="catCartCount">0</span>)
+          Voir Panier (<span id="catCartCount">0</span>)
         </button>
         <button class="cat-page-close" id="closeCatalogue" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -1522,8 +1619,8 @@ footer{
 
     <div class="cat-page-search">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="catSearch" placeholder="Search any fragrance…"/>
-      <span class="cat-search-count" id="catSearchCount">99 fragrances</span>
+      <input type="text" id="catSearch" placeholder="Rechercher un parfum…"/>
+      <span class="cat-search-count" id="catSearchCount">99 parfums</span>
     </div>
 
     <div class="cat-page-body" id="catPageBody">
@@ -1531,18 +1628,18 @@ footer{
       <div class="cat-section" id="catSection1">
         <div class="cat-section-label">
           <span>Catalogue 1</span>
-          <span class="cat-count-badge">50 fragrances</span>
+          <span class="cat-count-badge">50 parfums</span>
         </div>
         <div class="cat-oils-grid" id="catGrid1">
           
         <div class="oil-card cat-oil-card" data-name="His Confession" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="His Confession" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="His Confession" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">His Confession</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="His Confession" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1553,12 +1650,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Her Confession" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Her Confession" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Her Confession" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Her Confession</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Her Confession" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1569,12 +1666,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Guc by Cuc" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="Guc by Cuc" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="Guc by Cuc" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Guc by Cuc</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Guc by Cuc" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1585,12 +1682,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Noir" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="Noir" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="Noir" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Noir</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Noir" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1601,12 +1698,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Organza" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Organza" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Organza" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Organza</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Organza" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1617,12 +1714,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Oud for Greatness" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Oud for Greatness" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="Oud for Greatness" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Oud for Greatness</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Oud for Greatness" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1633,12 +1730,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Rayhaan Crimson" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Rayhaan Crimson" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Rayhaan Crimson" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Rayhaan Crimson</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Rayhaan Crimson" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1649,12 +1746,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Poison Girl" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="Poison Girl" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="Poison Girl" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Poison Girl</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Poison Girl" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1665,12 +1762,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Coco Chanel" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="Coco Chanel" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="Coco Chanel" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Coco Chanel</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Coco Chanel" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1681,12 +1778,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Allure" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Allure" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Allure" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Allure</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Allure" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1697,12 +1794,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Black Orchid" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Black Orchid" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Black Orchid" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Black Orchid</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Black Orchid" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1713,12 +1810,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Supremacy" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="Supremacy" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="Supremacy" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Supremacy</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Supremacy" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1729,12 +1826,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Oud for Happiness" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Oud for Happiness" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Oud for Happiness" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Oud for Happiness</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Oud for Happiness" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1745,12 +1842,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Bright Crystal" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Bright Crystal" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Bright Crystal" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Bright Crystal</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Bright Crystal" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1761,12 +1858,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Chanel N5" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="Chanel N5" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="Chanel N5" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Chanel N5</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Chanel N5" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1777,12 +1874,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Tobacco Oud" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="Tobacco Oud" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="Tobacco Oud" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Tobacco Oud</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Tobacco Oud" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1793,12 +1890,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Pink Sugar" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Pink Sugar" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Pink Sugar" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Pink Sugar</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Pink Sugar" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1809,12 +1906,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Vanilla Sex" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Vanilla Sex" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="Vanilla Sex" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Vanilla Sex</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Vanilla Sex" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1825,12 +1922,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Habit Rouge" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Habit Rouge" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Habit Rouge" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Habit Rouge</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Habit Rouge" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1841,12 +1938,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Bottled Elixir" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="Bottled Elixir" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="Bottled Elixir" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Bottled Elixir</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Bottled Elixir" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1857,12 +1954,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Homme Intense" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="Homme Intense" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="Homme Intense" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Homme Intense</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Homme Intense" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1873,12 +1970,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Pure Seduction" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Pure Seduction" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Pure Seduction" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Pure Seduction</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Pure Seduction" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1889,12 +1986,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Taj Sunset" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Taj Sunset" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Taj Sunset" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Taj Sunset</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Taj Sunset" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1905,12 +2002,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Bois D&#39;argent" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="Bois D&#39;argent" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="Bois D&#39;argent" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Bois D'argent</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Bois D&#39;argent" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1921,12 +2018,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Sì Intense" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Sì Intense" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Sì Intense" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Sì Intense</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Sì Intense" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1937,12 +2034,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="La nuit de L&#39;homme" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="La nuit de L&#39;homme" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="La nuit de L&#39;homme" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">La nuit de L'homme</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="La nuit de L&#39;homme" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1953,12 +2050,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Crystal Noir" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="Crystal Noir" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="Crystal Noir" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Crystal Noir</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Crystal Noir" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1969,12 +2066,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="L.12.12 Blanc" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="L.12.12 Blanc" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="L.12.12 Blanc" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">L.12.12 Blanc</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="L.12.12 Blanc" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -1985,12 +2082,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Cherry in the air" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Cherry in the air" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Cherry in the air" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Cherry in the air</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Cherry in the air" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2001,12 +2098,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Oud Bouquet" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Oud Bouquet" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="Oud Bouquet" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Oud Bouquet</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Oud Bouquet" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2017,12 +2114,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Lost Cherry" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Lost Cherry" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Lost Cherry" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Lost Cherry</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Lost Cherry" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2033,12 +2130,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="La petit robe noire" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="La petit robe noire" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="La petit robe noire" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">La petit robe noire</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="La petit robe noire" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2049,12 +2146,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Tobacco Vanille" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="Tobacco Vanille" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="Tobacco Vanille" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Tobacco Vanille</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Tobacco Vanille" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2065,12 +2162,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Trésor Midnight Lancôme" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Trésor Midnight Lancôme" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Trésor Midnight Lancôme" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Trésor Midnight Lancôme</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Trésor Midnight Lancôme" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2081,12 +2178,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Khamrah Dukhan" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Khamrah Dukhan" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Khamrah Dukhan" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Khamrah Dukhan</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Khamrah Dukhan" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2097,12 +2194,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Wanted" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="Wanted" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="Wanted" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Wanted</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Wanted" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2113,12 +2210,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Acqua de Gio" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Acqua de Gio" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Acqua de Gio" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Acqua de Gio</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Acqua de Gio" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2129,12 +2226,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Lady Million" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Lady Million" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Lady Million" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Lady Million</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Lady Million" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2145,12 +2242,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Terre d&#39;Hermes" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="Terre d&#39;Hermes" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="Terre d&#39;Hermes" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Terre d'Hermes</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Terre d&#39;Hermes" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2161,12 +2258,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Obsession Night" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="Obsession Night" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="Obsession Night" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Obsession Night</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Obsession Night" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2177,12 +2274,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Ombre Nomade" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Ombre Nomade" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Ombre Nomade" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Ombre Nomade</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Ombre Nomade" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2193,12 +2290,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Liquid Brun" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Liquid Brun" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="Liquid Brun" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Liquid Brun</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Liquid Brun" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2209,12 +2306,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Sì Giorgio Armani" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Sì Giorgio Armani" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Sì Giorgio Armani" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Sì Giorgio Armani</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Sì Giorgio Armani" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2225,12 +2322,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Amor Amor" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="Amor Amor" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="Amor Amor" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Amor Amor</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Amor Amor" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2241,12 +2338,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="La belle, le Parfum" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="La belle, le Parfum" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="La belle, le Parfum" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">La belle, le Parfum</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="La belle, le Parfum" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2257,12 +2354,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Val-Donna" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Val-Donna" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Val-Donna" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Val-Donna</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Val-Donna" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2273,12 +2370,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Val-Roma Dream" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Val-Roma Dream" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Val-Roma Dream" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Val-Roma Dream</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Val-Roma Dream" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2289,12 +2386,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Sanfand" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="Sanfand" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="Sanfand" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Sanfand</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Sanfand" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2305,12 +2402,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Tuxedo" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Tuxedo" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Tuxedo" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Tuxedo</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Tuxedo" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2321,12 +2418,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Paradoxe" data-cat="Catalogue 1">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Paradoxe" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Paradoxe" loading="lazy"/>
             <span class="oil-tag">Catalogue 1</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Paradoxe</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Paradoxe" data-cat="Catalogue 1" aria-label="Add to cart">
@@ -2341,18 +2438,18 @@ footer{
       <div class="cat-section" id="catSection2">
         <div class="cat-section-label">
           <span>Catalogue 2</span>
-          <span class="cat-count-badge">49 fragrances</span>
+          <span class="cat-count-badge">49 parfums</span>
         </div>
         <div class="cat-oils-grid" id="catGrid2">
           
         <div class="oil-card cat-oil-card" data-name="Bleu de Chanel" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Bleu de Chanel" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Bleu de Chanel" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Bleu de Chanel</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Bleu de Chanel" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2363,12 +2460,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Gucci Guilty" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Gucci Guilty" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Gucci Guilty" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Gucci Guilty</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Gucci Guilty" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2379,12 +2476,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="La vie est belle" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="La vie est belle" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="La vie est belle" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">La vie est belle</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="La vie est belle" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2395,12 +2492,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Hugo Boss femme" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="Hugo Boss femme" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="Hugo Boss femme" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Hugo Boss femme</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Hugo Boss femme" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2411,12 +2508,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Dior forever and ever" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Dior forever and ever" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Dior forever and ever" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Dior forever and ever</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Dior forever and ever" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2427,12 +2524,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="1 Million (P.R)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="1 Million (P.R)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="1 Million (P.R)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">1 Million (P.R)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="1 Million (P.R)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2443,12 +2540,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Dunhill Desire" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Dunhill Desire" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Dunhill Desire" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Dunhill Desire</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Dunhill Desire" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2459,12 +2556,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="YSL Black Opium" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="YSL Black Opium" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="YSL Black Opium" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">YSL Black Opium</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="YSL Black Opium" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2475,12 +2572,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Delina De Marly" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="Delina De Marly" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="Delina De Marly" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Delina De Marly</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Delina De Marly" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2491,12 +2588,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Invictus (P.R)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Invictus (P.R)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Invictus (P.R)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Invictus (P.R)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Invictus (P.R)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2507,12 +2604,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Good Girl Gone Bad" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Good Girl Gone Bad" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Good Girl Gone Bad" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Good Girl Gone Bad</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Good Girl Gone Bad" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2523,12 +2620,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="L&#39;eau d&#39;Issey (I.M)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="L&#39;eau d&#39;Issey (I.M)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="L&#39;eau d&#39;Issey (I.M)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">L'eau d'Issey (I.M)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="L&#39;eau d&#39;Issey (I.M)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2539,12 +2636,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="MFK Baccarat Rouge 540" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="MFK Baccarat Rouge 540" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="MFK Baccarat Rouge 540" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">MFK Baccarat Rouge 540</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="MFK Baccarat Rouge 540" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2555,12 +2652,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Creed Aventus" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Creed Aventus" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Creed Aventus" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Creed Aventus</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Creed Aventus" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2571,12 +2668,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Ramz Silver" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="Ramz Silver" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="Ramz Silver" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Ramz Silver</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Ramz Silver" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2587,12 +2684,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Sauvage Dior" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="Sauvage Dior" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="Sauvage Dior" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Sauvage Dior</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Sauvage Dior" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2603,12 +2700,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="The One (D&G)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="The One (D&G)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="The One (D&G)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">The One (D&G)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="The One (D&G)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2619,12 +2716,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Scandal" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Scandal" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="Scandal" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Scandal</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Scandal" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2635,12 +2732,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Splendor" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Splendor" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Splendor" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Splendor</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Splendor" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2651,12 +2748,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Ultra Male (J.P.G)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="Ultra Male (J.P.G)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="Ultra Male (J.P.G)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Ultra Male (J.P.G)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Ultra Male (J.P.G)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2667,12 +2764,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Khamrah" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="Khamrah" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="Khamrah" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Khamrah</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Khamrah" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2683,12 +2780,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Gucci Rush" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Gucci Rush" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Gucci Rush" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Gucci Rush</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Gucci Rush" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2699,12 +2796,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Donna" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Donna" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Donna" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Donna</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Donna" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2715,12 +2812,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Chance Chanel" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="Chance Chanel" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="Chance Chanel" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Chance Chanel</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Chance Chanel" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2731,12 +2828,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Chi-som Intense" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Chi-som Intense" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Chi-som Intense" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Chi-som Intense</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Chi-som Intense" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2747,12 +2844,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Hypnotic Poison Dior" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Hypnotic Poison Dior" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Hypnotic Poison Dior" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Hypnotic Poison Dior</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Hypnotic Poison Dior" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2763,12 +2860,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="L&#39;eau D&#39;issey Lotus" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="L&#39;eau D&#39;issey Lotus" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="L&#39;eau D&#39;issey Lotus" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">L'eau D'issey Lotus</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="L&#39;eau D&#39;issey Lotus" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2779,12 +2876,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Yara" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="Yara" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="Yara" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Yara</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Yara" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2795,12 +2892,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Dylan Blue Versace" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Dylan Blue Versace" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Dylan Blue Versace" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Dylan Blue Versace</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Dylan Blue Versace" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2811,12 +2908,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Eros Versace" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Eros Versace" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="Eros Versace" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Eros Versace</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Eros Versace" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2827,12 +2924,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Boss Orange" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="Boss Orange" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="Boss Orange" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Boss Orange</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Boss Orange" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2843,12 +2940,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="CK Eternity" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="CK Eternity" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="CK Eternity" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">CK Eternity</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="CK Eternity" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2859,12 +2956,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="YSL Libre" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="YSL Libre" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="YSL Libre" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">YSL Libre</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="YSL Libre" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2875,12 +2972,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="YSL Mon Paris" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="YSL Mon Paris" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="YSL Mon Paris" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">YSL Mon Paris</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="YSL Mon Paris" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2891,12 +2988,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="CK Euphoria" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="CK Euphoria" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="CK Euphoria" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">CK Euphoria</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="CK Euphoria" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2907,12 +3004,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="My Way (G.A)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="My Way (G.A)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="My Way (G.A)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">My Way (G.A)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="My Way (G.A)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2923,12 +3020,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Bombshell (V.S)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Bombshell (V.S)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Bombshell (V.S)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Bombshell (V.S)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Bombshell (V.S)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2939,12 +3036,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Flora by Gucci" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" alt="Flora by Gucci" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80&fit=crop" class="lazy-img" alt="Flora by Gucci" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Flora by Gucci</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Flora by Gucci" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2955,12 +3052,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Yellow Dream (RBID)" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" alt="Yellow Dream (RBID)" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1619994121345-b61cd610c5a6?w=400&q=80&fit=crop" class="lazy-img" alt="Yellow Dream (RBID)" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Yellow Dream (RBID)</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Yellow Dream (RBID)" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2971,12 +3068,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="J&#39;adore Dior" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" alt="J&#39;adore Dior" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=400&q=80&fit=crop" class="lazy-img" alt="J&#39;adore Dior" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">J'adore Dior</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="J&#39;adore Dior" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -2987,12 +3084,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Coco Mademoiselle Chanel" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" alt="Coco Mademoiselle Chanel" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80&fit=crop" class="lazy-img" alt="Coco Mademoiselle Chanel" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Coco Mademoiselle Chanel</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Coco Mademoiselle Chanel" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3003,12 +3100,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="1932 Chanel" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="1932 Chanel" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" class="lazy-img" alt="1932 Chanel" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">1932 Chanel</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="1932 Chanel" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3019,12 +3116,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="9:00 PM" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" alt="9:00 PM" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80&fit=crop" class="lazy-img" alt="9:00 PM" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">9:00 PM</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="9:00 PM" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3035,12 +3132,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Eden Juicy Apple 01" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" alt="Eden Juicy Apple 01" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400&q=80&fit=crop" class="lazy-img" alt="Eden Juicy Apple 01" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Eden Juicy Apple 01</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Eden Juicy Apple 01" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3051,12 +3148,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Club de Nuit" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" alt="Club de Nuit" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80&fit=crop" class="lazy-img" alt="Club de Nuit" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Club de Nuit</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Club de Nuit" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3067,12 +3164,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Angel" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" alt="Angel" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1590156562745-5b8f5a151867?w=400&q=80&fit=crop" class="lazy-img" alt="Angel" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Angel</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Angel" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3083,12 +3180,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Kouros" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" alt="Kouros" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1592945403407-9caf930c3b55?w=400&q=80&fit=crop" class="lazy-img" alt="Kouros" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Kouros</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Kouros" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3099,12 +3196,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Oud Satin Mood" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" alt="Oud Satin Mood" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1594842447773-39c8e5c5e17e?w=400&q=80&fit=crop" class="lazy-img" alt="Oud Satin Mood" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Oud Satin Mood</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Oud Satin Mood" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3115,12 +3212,12 @@ footer{
         </div>
         <div class="oil-card cat-oil-card" data-name="Amber Oud Gold Edition" data-cat="Catalogue 2">
           <div class="oil-img">
-            <img src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" alt="Amber Oud Gold Edition" loading="lazy"/>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80&fit=crop" class="lazy-img" alt="Amber Oud Gold Edition" loading="lazy"/>
             <span class="oil-tag">Catalogue 2</span>
           </div>
           <div class="oil-info">
             <h3 class="oil-name">Amber Oud Gold Edition</h3>
-            <p class="oil-notes">Fragrance Oil · Alcohol-Free</p>
+            <p class="oil-notes">Huile de Parfum · Sans Alcool</p>
             <div class="oil-footer">
               <span class="oil-price">5.000 FCFA</span>
               <button class="oil-add cat-add-btn" data-name="Amber Oud Gold Edition" data-cat="Catalogue 2" aria-label="Add to cart">
@@ -3135,7 +3232,7 @@ footer{
     </div>
 
     <div class="cat-page-footer">
-      <p class="cat-footer-note">All fragrance oils — 5.000 FCFA · Alcohol-free</p>
+      <p class="cat-footer-note">Toutes les huiles de parfum — 5.000 FCFA · Sans alcool</p>
       <button class="btn-wa-order-cat" id="btnWaOrderCat">
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Contact on WhatsApp
@@ -3149,7 +3246,7 @@ footer{
 <!-- ═══ TESTIMONIALS ═══ -->
 <section class="testi-section">
   <div class="section-head reveal">
-    <h2>What Our Clients Say</h2>
+    <h2>Ce que Disent Nos Clients</h2>
     <div class="underline"></div>
   </div>
   <div class="testi-grid">
@@ -3177,7 +3274,7 @@ footer{
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
       </div>
-      <p class="testi-text">Rose Velvet was my wedding day fragrance. The packaging was so beautifully crafted I cried before opening it. Every detail is pure perfection — a true luxury experience.</p>
+      <p class="testi-text">Rose Velvet était mon parfum de mariage. L'emballage était si magnifiquement conçu que j'ai pleuré avant de l'ouvrir. Chaque détail est perfection — une véritable expérience de luxe.</p>
       <div class="testi-author">
         <div class="testi-ava" style="background:#A06060">SB</div>
         <div><div class="testi-name">Sofia Bellini</div><div class="testi-loc">Yaoundé, Cameroon</div></div>
@@ -3192,7 +3289,7 @@ footer{
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
       </div>
-      <p class="testi-text">The alcohol-free oils changed everything for my sensitive skin. Deep and smoky at first, then soft and intimate hours later. I've recommended Aura to everyone I know.</p>
+      <p class="testi-text">Les huiles sans alcool ont tout changé pour ma peau sensible. Profond et boisé au début, puis doux et intime des heures plus tard. J'ai recommandé Aura à tous mes proches.</p>
       <div class="testi-author">
         <div class="testi-ava" style="background:#405870">KO</div>
         <div><div class="testi-name">Kofi Owusu</div><div class="testi-loc">Bafoussam, Cameroon</div></div>
@@ -3203,14 +3300,14 @@ footer{
 
 <!-- ═══ WHATSAPP CTA ═══ -->
 <section class="wa-section" id="contact">
-  <span class="eyebrow reveal">Personal Service</span>
-  <h2 class="reveal">Need help finding your<br><em>perfect scent?</em></h2>
-  <p class="reveal">Our fragrance specialists are ready to guide you — whether it's a gift, a signature scent, or something entirely bespoke.</p>
-  <a href="https://wa.me/237690442986" class="btn-wa reveal" target="_blank">
+  <span class="eyebrow reveal">Service Personnalisé</span>
+  <h2 class="reveal">Besoin d'aide pour trouver votre<br><em>parfum idéal&nbsp;?</em></h2>
+  <p class="reveal">Nos spécialistes en parfumerie sont prêts à vous guider — qu'il s'agisse d'un cadeau, d'un parfum signature ou d'une création sur mesure.</p>
+  <a href="https://wa.me/237690442986" class="btn-wa reveal" id="btnWaMain" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Chat on WhatsApp
   </a>
-  <div class="wa-pulse reveal"><span class="wa-dot"></span>Available Now · Typically replies in minutes</div>
+  <div class="wa-pulse reveal"><span class="wa-dot"></span>Disponible maintenant · Répond en quelques minutes</div>
 </section>
 
 <!-- ═══ FOOTER ═══ -->
@@ -3218,7 +3315,7 @@ footer{
   <div class="footer-top">
     <div class="footer-brand">
       <span class="footer-brand-logo">AURA</span>
-      <p>A luxury fragrance house dedicated to the art of exceptional scent — from rare perfumes to hand-crafted fragrance oils.</p>
+      <p>Une maison de parfums de luxe dédiée à l'art du parfum exceptionnel — des parfums rares aux huiles artisanales.</p>
       <div class="social-links">
         <!-- Facebook -->
         <a href="#" class="social-link" aria-label="Facebook">
@@ -3239,43 +3336,43 @@ footer{
       </div>
     </div>
     <div class="footer-col">
-      <h4>Shop</h4>
+      <h4>Boutique</h4>
       <ul>
         <li><a href="#">Eau de Parfum</a></li>
-        <li><a href="#">Fragrance Oils</a></li>
+        <li><a href="#">Huiles de Parfum</a></li>
         <li><a href="#">Oud & Oriental</a></li>
         <li><a href="#">Floral & Fresh</a></li>
-        <li><a href="#">Gift Sets</a></li>
+        <li><a href="#">Coffrets</a></li>
         <li><a href="#">Limited Editions      </ul>
     </div>
     <div class="footer-col">
-      <h4>Help</h4>
+      <h4>Aide</h4>
       <ul>
-        <li><a href="#">Fragrance Guide</a></li>
-        <li><a href="#">Shipping &amp; Returns</a></li>
-        <li><a href="#">Track Your Order</a></li>
+        <li><a href="#">Guide Olfactif</a></li>
+        <li><a href="#">Livraison &amp; Retours</a></li>
+        <li><a href="#">Suivre ma Commande</a></li>
         <li><a href="#">FAQ</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Nous Contacter</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4>Entreprise</h4>
       <ul>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Craftsmanship</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Careers</a></li>
+        <li><a href="#">Notre Histoire</a></li>
+        <li><a href="#">Savoir-Faire</a></li>
+        <li><a href="#">Durabilité</a></li>
+        <li><a href="#">Presse</a></li>
+        <li><a href="#">Carrières</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Aura Fragrance House. All rights reserved.</p>
+    <p>© 2026 Aura Maison de Parfums. Tous droits réservés.</p>
     <div class="footer-bottom-links">
-      <a href="#">Terms of Use</a>
-      <a href="#">Privacy</a>
-      <a href="#">Shipping</a>
-      <a href="#">Policy</a>
+      <a href="#">Conditions d'Utilisation</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Livraison</a>
+      <a href="#">Politique</a>
     </div>
   </div>
 </footer>
@@ -3286,23 +3383,15 @@ footer{
    AURA — ALL JS (unified)
 ════════════════════════ */
 
-/* ── LOADER ── */
-window.addEventListener('load', function(){
-  setTimeout(function(){ 
-    var l = document.getElementById('loader');
-    if(l) l.classList.add('done');
-  }, 1500);
-});
+
 
 /* ── CURSOR ── */
 (function(){
-  var cur  = document.getElementById('cursor');
-  var ring = document.getElementById('cursor-ring');
-  if(!cur || !ring) return;
-  var mx=0, my=0, rx=0, ry=0;
-  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
-  (function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
-  document.querySelectorAll('a,button,.prod-card,.oil-card,.testi-card').forEach(function(el){
+  if(!window.matchMedia('(pointer:fine)').matches) return;
+  var cur = document.getElementById('cursor');
+  if(!cur) return;
+  document.addEventListener('mousemove', function(e){ cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; });
+  document.querySelectorAll('a,button,.prod-card,.oil-card').forEach(function(el){
     el.addEventListener('mouseenter', function(){ document.body.classList.add('cx'); });
     el.addEventListener('mouseleave', function(){ document.body.classList.remove('cx'); });
   });
@@ -3346,7 +3435,7 @@ window.addEventListener('load', function(){
         name  : nameEl.textContent.trim(),
         brand : 'Fragrance Oil',
         price : '5.000 FCFA',
-        img   : imgEl ? imgEl.src : ''
+        img   : imgEl ? (imgEl.getAttribute('data-src') || imgEl.src) : ''
       });
     });
     /* All catalogue cards (dedup) */
@@ -3393,7 +3482,7 @@ window.addEventListener('load', function(){
       var div = document.createElement('div');
       div.className = 'search-result-item';
       div.innerHTML =
-        '<img class="sri-img" src="'+(item.img||fb)+'" alt="'+item.name+'" onerror="this.src=\''+fb+'\'"/>'+
+        '<img loading="lazy" class="sri-img" src="'+(item.img||fb)+'" alt="'+item.name+'" onerror="this.src=\''+fb+'\'"/>'+
         '<div class="sri-body">'+
           '<div class="sri-type">'+item.type+'</div>'+
           '<div class="sri-name">'+hl(item.name,q)+'</div>'+
@@ -3411,7 +3500,7 @@ window.addEventListener('load', function(){
               id    : it.name,
               name  : it.name,
               brand : it.brand,
-              notes : it.type === 'Perfume' ? '' : 'Fragrance Oil \u00B7 Alcohol-Free',
+              notes : it.type === 'Perfume' ? '' : 'Fragrance Oil \u00B7 Sans Alcool',
               price : it.price,
               img   : it.img || fb
             });
@@ -3423,7 +3512,7 @@ window.addEventListener('load', function(){
             btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>';
             btn.style.background  = '';
             btn.style.borderColor = '';
-          }, 1500);
+          }, 400);
         });
       })(item, addBtn);
       list.appendChild(div);
@@ -3532,7 +3621,7 @@ window.addEventListener('load', function(){
       div.className = 'cart-item';
       var fb = 'https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=140&q=70';
       div.innerHTML =
-        '<img class="cart-item-img" src="'+(item.img||fb)+'" alt="'+item.name+'" onerror="this.src=\''+fb+'\'"/>'+
+        '<img loading="lazy" class="cart-item-img" src="'+(item.img||fb)+'" alt="'+item.name+'" onerror="this.src=\''+fb+'\'"/>'+
         '<div class="cart-item-body">'+
           '<div class="cart-item-brand">'+(item.brand||'Fragrance Oil')+'</div>'+
           '<div class="cart-item-name">'+item.name+'</div>'+
@@ -3619,7 +3708,7 @@ window.addEventListener('load', function(){
       btn.innerHTML = plusSvg;
       btn.style.background  = '';
       btn.style.borderColor = '';
-    }, 1500);
+    }, 400);
   }
 
   /* ── product overlay buttons ── */
@@ -3640,7 +3729,7 @@ window.addEventListener('load', function(){
       var orig = btn.textContent;
       btn.textContent = existed ? 'Already Added ✓' : 'Added ✓';
       btn.style.background = '#27ae60';
-      setTimeout(function(){ btn.textContent=orig; btn.style.background=''; }, 1500);
+      setTimeout(function(){ btn.textContent=orig; btn.style.background=''; }, 400);
       openCart();
     });
   });
@@ -3679,7 +3768,7 @@ window.addEventListener('load', function(){
         id    : name,
         name  : name,
         brand : cat,
-        notes : 'Fragrance Oil · Alcohol-Free',
+        notes : 'Huile de Parfum · Sans Alcool',
         price : '5.000 FCFA',
         img   : imgSrc || 'https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=140&q=70'
       };
@@ -3725,6 +3814,17 @@ window.addEventListener('load', function(){
     var o = byId('catalogueOverlay');
     if(o) o.classList.add('open');
     document.body.style.overflow = 'hidden';
+    /* trigger lazy load for visible catalogue images */
+    setTimeout(function(){
+      var catBody = byId('catPageBody');
+      if(!catBody) return;
+      catBody.querySelectorAll('img[data-src]').forEach(function(img){
+        if(!img.src || img.src.indexOf('data:image') === 0){
+          img.src = img.getAttribute('data-src');
+          img.classList.add('loaded');
+        }
+      });
+    }, 50);
   }
   function closeCatalogue(){
     var o = byId('catalogueOverlay');
@@ -3770,6 +3870,476 @@ window.addEventListener('load', function(){
   }
 
   renderCart();
+})();
+</script>
+
+<script>
+/* ════════════════════════
+   AURA — LANGUE / LANGUAGE
+════════════════════════ */
+var TRANSLATIONS = {
+  fr: {
+    /* page title */
+    'page-title': 'AURA — Parfums de Luxe & Huiles de Parfum',
+    /* topbar */
+    'tb-1': '✦ Livraison gratuite dès 20.000 FCFA',
+    'tb-2': '✦ Nouvelles arrivées chaque semaine',
+    'tb-3': '✦ Parfums de luxe authentiques',
+    /* nav */
+    'nav-collections': 'Collections',
+    'nav-oils': 'Huiles',
+    'nav-about': 'À propos',
+    'nav-contact': 'Contact',
+    'nav-cta': 'Commander',
+    'nav-search-ph': 'Rechercher un parfum…',
+    /* hero */
+    'hero-eyebrow': 'Nouvelle Collection 2026',
+    'hero-title-line1': 'L\'Art',
+    'hero-title-em': 'du Parfum',
+    'hero-title-line3': 'Sublimé',
+    'hero-sub': 'Parfums rares et huiles artisanales pour ceux qui laissent une pièce parfumée comme un souvenir inoubliable.',
+    'btn-explore': 'Explorer la Collection',
+    'btn-find': 'Trouver Votre Parfum',
+    /* about */
+    'about-label': 'Notre Histoire',
+    'about-title': 'Créé pour les',
+    'about-title-em': 'Connaisseurs',
+    'about-text': "Né d'une passion pour l'art olfactif, Aura sélectionne les meilleures matières premières — rose absolue bulgare, oud cambodgien, vanille de Madagascar — pour créer des parfums qui transcendent la mode et parlent à l'âme.",
+    'stat-label-1': "Ans d'Expertise",
+    'stat-label-2': 'Compositions Uniques',
+    'stat-label-3': 'Clients Satisfaits',
+    'stat-label-4': 'Pays Desservis',
+    /* featured */
+    'featured-title': 'Produits Vedettes',
+    'tab-women': 'Femmes',
+    'tab-men': 'Hommes',
+    'tab-sets': 'Coffrets Cadeaux',
+    'view-all': 'Voir Tout',
+    'add-to-cart': 'Ajouter au Panier',
+    'badge-new': 'Nouveau',
+    'badge-limited': 'Limité',
+    'badge-gift': 'Cadeau',
+    'badge-bestseller': 'Meilleures Ventes',
+    /* oils */
+    'oils-title': 'Huiles de Parfum',
+    'oils-sub': 'Toutes les huiles de parfum — 5.000 FCFA · Sans alcool',
+    'oil-notes-default': 'Huile de Parfum · Sans Alcool',
+    'see-all-btn': 'Voir les 99 Parfums',
+    'tag-alcohol-free': 'Sans Alcool',
+    'tag-best-seller': 'Meilleures Ventes',
+    'tag-new': 'Nouveau',
+    /* catalogue */
+    'cat-title': 'Catalogue Complet de Parfums',
+    'cat-sub': '99 huiles · 5.000 FCFA chacune · Sans alcool',
+    'cat-view-cart': 'Voir Panier',
+    'cat-search-ph': 'Rechercher un parfum…',
+    'cat-count-99': '99 parfums',
+    'cat-count-50': '50 parfums',
+    'cat-count-49': '49 parfums',
+    'cat-footer-note': 'Toutes les huiles — 5.000 FCFA · Sans alcool',
+    'cat-wa-btn': 'Contacter sur WhatsApp',
+    'cat-label-1': 'Catalogue 1',
+    'cat-label-2': 'Catalogue 2',
+    /* testimonials */
+    'testi-title': 'Ce que Disent Nos Clients',
+    'testi-1': "Noir Intense a complètement remplacé tous mes parfums. La tenue est incroyable — je l'ai vaporisé le matin et mes collègues me complimentaient encore à 21h. Une vraie révélation.",
+    'testi-2': "Rose Velvet était mon parfum de mariage. L'emballage était si magnifiquement conçu que j'ai pleuré avant de l'ouvrir. Chaque détail est perfection — une véritable expérience de luxe.",
+    'testi-3': "Les huiles sans alcool ont tout changé pour ma peau sensible. Profond et boisé au début, puis doux et intime des heures plus tard. J'ai recommandé Aura à tous mes proches.",
+    /* wa section */
+    'wa-label': 'Service Personnalisé',
+    'wa-title': "Besoin d'aide pour trouver votre",
+    'wa-title-em': 'parfum idéal\u00a0?',
+    'wa-desc': "Nos spécialistes en parfumerie sont prêts à vous guider — qu'il s'agisse d'un cadeau, d'un parfum signature ou d'une création sur mesure.",
+    'wa-btn': 'Discuter sur WhatsApp',
+    'wa-status': 'Disponible maintenant · Répond en quelques minutes',
+    /* footer */
+    'footer-desc': "Une maison de parfums de luxe dédiée à l'art du parfum exceptionnel — des parfums rares aux huiles artisanales.",
+    'footer-shop': 'Boutique',
+    'footer-edp': 'Eau de Parfum',
+    'footer-oils': 'Huiles de Parfum',
+    'footer-oud': 'Oud & Oriental',
+    'footer-floral': 'Floral & Frais',
+    'footer-gift': 'Coffrets Cadeaux',
+    'footer-limited': 'Éditions Limitées',
+    'footer-help': 'Aide',
+    'footer-guide': 'Guide Olfactif',
+    'footer-shipping': 'Livraison & Retours',
+    'footer-track': 'Suivre ma Commande',
+    'footer-faq': 'FAQ',
+    'footer-contact': 'Nous Contacter',
+    'footer-company': 'Entreprise',
+    'footer-story': 'Notre Histoire',
+    'footer-craft': 'Savoir-Faire',
+    'footer-sustain': 'Durabilité',
+    'footer-press': 'Presse',
+    'footer-careers': 'Carrières',
+    'footer-copy': '© 2026 Aura Maison de Parfums. Tous droits réservés.',
+    'footer-terms': "Conditions d'Utilisation",
+    'footer-privacy': 'Confidentialité',
+    'footer-ship': 'Livraison',
+    'footer-policy': 'Politique',
+    /* cart */
+    'cart-title': 'Votre Panier',
+    'cart-clear': 'Tout supprimer',
+    'cart-empty': 'Votre panier est vide.\nAjoutez des parfums pour commencer.',
+    'cart-wa-btn': 'Contacter sur WhatsApp',
+    'cart-note': 'Aucun paiement sur ce site. Notre équipe vous assistera directement sur WhatsApp.',
+    'cart-subtotal': 'Sous-total',
+    /* search */
+    'search-ph': 'Rechercher un parfum…',
+    'search-head-init': 'Résultats',
+    'search-no': 'Aucun résultat pour',
+    'search-type-perf': 'Parfum',
+    'search-type-oil': 'Huile de Parfum',
+    /* js alerts */
+    'alert-empty': 'Votre panier est vide ! Ajoutez des parfums d\'abord.',
+    'confirm-clear': 'Supprimer tous les articles du panier ?',
+    'wa-msg-intro': 'Bonjour ! Je suis intéressé(e) par les produits suivants de *AURA Parfums* :',
+    'wa-msg-outro': 'Merci de me faire savoir comment procéder. Merci !',
+    'wa-msg-collection': 'Collection',
+    'wa-msg-price': 'Prix',
+    'search-results': 'résultat',
+    'search-results-pl': 'résultats',
+    'search-fragrances': 'parfums',
+  },
+  en: {
+    'page-title': 'AURA — Luxury Perfume & Fragrance Oils',
+    'tb-1': '✦ Free Delivery on Orders Over 20.000 FCFA',
+    'tb-2': '✦ New Arrivals Every Week',
+    'tb-3': '✦ Authentic Luxury Fragrances',
+    'nav-collections': 'Collections',
+    'nav-oils': 'Oils',
+    'nav-about': 'About',
+    'nav-contact': 'Contact',
+    'nav-cta': 'Shop Now',
+    'nav-search-ph': 'Search product…',
+    'hero-eyebrow': 'New Collection 2026',
+    'hero-title-line1': 'The Art',
+    'hero-title-em': 'of Scent',
+    'hero-title-line3': 'Perfected',
+    'hero-sub': 'Rare perfumes and hand-crafted fragrance oils for those who leave a room smelling like a memory worth keeping.',
+    'btn-explore': 'Explore Collection',
+    'btn-find': 'Find Your Scent',
+    'about-label': 'Our Story',
+    'about-title': 'Crafted for',
+    'about-title-em': 'Connoisseurs',
+    'about-text': "Born from a passion for olfactory art, Aura sources the finest raw materials — Bulgarian rose absolutes, Cambodian oud, Madagascan vanilla — to create fragrances that transcend fashion and speak to something deeper.",
+    'stat-label-1': 'Years of Craft',
+    'stat-label-2': 'Unique Blends',
+    'stat-label-3': 'Happy Clients',
+    'stat-label-4': 'Countries Served',
+    'featured-title': 'Featured Products',
+    'tab-women': 'Women',
+    'tab-men': 'Men',
+    'tab-sets': 'Value & Gift Sets',
+    'view-all': 'View All',
+    'add-to-cart': 'Add to Cart',
+    'badge-new': 'New',
+    'badge-limited': 'Limited',
+    'badge-gift': 'Gift',
+    'badge-bestseller': 'Bestseller',
+    'oils-title': 'Fragrance Oils',
+    'oils-sub': 'All fragrance oils — 5.000 FCFA · Alcohol-free',
+    'oil-notes-default': 'Fragrance Oil · Alcohol-Free',
+    'see-all-btn': 'See All 99 Fragrances',
+    'tag-alcohol-free': 'Alcohol-Free',
+    'tag-best-seller': 'Best Seller',
+    'tag-new': 'New',
+    'cat-title': 'Complete Fragrance Catalogue',
+    'cat-sub': '99 oils · 5.000 FCFA each · Alcohol-free',
+    'cat-view-cart': 'View Cart',
+    'cat-search-ph': 'Search any fragrance…',
+    'cat-count-99': '99 fragrances',
+    'cat-count-50': '50 fragrances',
+    'cat-count-49': '49 fragrances',
+    'cat-footer-note': 'All fragrance oils — 5.000 FCFA · Alcohol-free',
+    'cat-wa-btn': 'Contact on WhatsApp',
+    'cat-label-1': 'Catalogue 1',
+    'cat-label-2': 'Catalogue 2',
+    'testi-title': 'What Our Clients Say',
+    'testi-1': "Noir Intense has completely replaced every perfume I owned. The longevity is unreal — I sprayed once in the morning and my coworkers were still complimenting me at 9pm. This is a life-changing find.",
+    'testi-2': "Rose Velvet was my wedding day fragrance. The packaging was so beautifully crafted I cried before opening it. Every detail is pure perfection — a true luxury experience.",
+    'testi-3': "The alcohol-free oils changed everything for my sensitive skin. Deep and smoky at first, then soft and intimate hours later. I've recommended Aura to everyone I know.",
+    'wa-label': 'Personal Service',
+    'wa-title': 'Need help finding your',
+    'wa-title-em': 'perfect scent?',
+    'wa-desc': "Our fragrance specialists are ready to guide you — whether it's a gift, a signature scent, or something entirely bespoke.",
+    'wa-btn': 'Chat on WhatsApp',
+    'wa-status': 'Available Now · Typically replies in minutes',
+    'footer-desc': 'A luxury fragrance house dedicated to the art of exceptional scent — from rare perfumes to hand-crafted fragrance oils.',
+    'footer-shop': 'Shop',
+    'footer-edp': 'Eau de Parfum',
+    'footer-oils': 'Fragrance Oils',
+    'footer-oud': 'Oud & Oriental',
+    'footer-floral': 'Floral & Fresh',
+    'footer-gift': 'Gift Sets',
+    'footer-limited': 'Limited Editions',
+    'footer-help': 'Help',
+    'footer-guide': 'Fragrance Guide',
+    'footer-shipping': 'Shipping & Returns',
+    'footer-track': 'Track Your Order',
+    'footer-faq': 'FAQ',
+    'footer-contact': 'Contact Us',
+    'footer-company': 'Company',
+    'footer-story': 'Our Story',
+    'footer-craft': 'Craftsmanship',
+    'footer-sustain': 'Sustainability',
+    'footer-press': 'Press',
+    'footer-careers': 'Careers',
+    'footer-copy': '© 2026 Aura Fragrance House. All rights reserved.',
+    'footer-terms': 'Terms of Use',
+    'footer-privacy': 'Privacy',
+    'footer-ship': 'Shipping',
+    'footer-policy': 'Policy',
+    'cart-title': 'Your Cart',
+    'cart-clear': 'Delete all',
+    'cart-empty': 'Your cart is empty.\nAdd some fragrances to begin.',
+    'cart-wa-btn': 'Contact on WhatsApp',
+    'cart-note': 'No payment processed here. Our team will assist you directly on WhatsApp.',
+    'cart-subtotal': 'Subtotal',
+    'search-ph': 'Search product…',
+    'search-head-init': 'Results',
+    'search-no': 'No results for',
+    'search-type-perf': 'Perfume',
+    'search-type-oil': 'Fragrance Oil',
+    'alert-empty': 'Your cart is empty! Add some fragrances first.',
+    'confirm-clear': 'Remove all items from your cart?',
+    'wa-msg-intro': 'Hello! I am interested in the following from *AURA Fragrance*:',
+    'wa-msg-outro': 'Please let me know how to proceed. Thank you!',
+    'wa-msg-collection': 'Collection',
+    'wa-msg-price': 'Price',
+    'search-results': 'result',
+    'search-results-pl': 'results',
+    'search-fragrances': 'fragrances',
+  }
+};
+
+var currentLang = 'fr';
+
+function t(key){ return (TRANSLATIONS[currentLang] || TRANSLATIONS['fr'])[key] || key; }
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('htmlRoot').lang = lang;
+  document.getElementById('btnFR').classList.toggle('active', lang==='fr');
+  document.getElementById('btnEN').classList.toggle('active', lang==='en');
+  localStorage.setItem('aura-lang', lang);
+  applyTranslations();
+}
+
+function applyTranslations(){
+  var l = currentLang;
+  function el(id){ return document.getElementById(id); }
+  function txt(id, key){ var e=el(id); if(e) e.textContent=t(key); }
+  function ph(id, key){ var e=el(id); if(e) e.placeholder=t(key); }
+  function html(id, key){ var e=el(id); if(e) e.innerHTML=t(key); }
+
+  /* page title */
+  document.title = t('page-title');
+
+  /* topbar */
+  var tb = document.querySelectorAll('.topbar span');
+  if(tb[0]) tb[0].innerHTML = t('tb-1');
+  if(tb[1]) tb[1].textContent = t('tb-2');
+  if(tb[2]) tb[2].textContent = t('tb-3');
+
+  /* nav links */
+  var navLinks = document.querySelectorAll('.nav-links a');
+  var mobileLinks = document.querySelectorAll('.mobile-menu a');
+  var navKeys = ['nav-collections','nav-oils','nav-about','nav-contact'];
+  navLinks.forEach(function(a,i){ if(navKeys[i]) a.textContent=t(navKeys[i]); });
+  mobileLinks.forEach(function(a,i){ if(navKeys[i]) a.textContent=t(navKeys[i]); });
+
+  /* nav cta */
+  var navCta = document.querySelector('.nav-cta');
+  if(navCta) navCta.textContent = t('nav-cta');
+
+  /* nav search */
+  ph('navSearchInput','nav-search-ph');
+  ph('catSearch','cat-search-ph');
+
+  /* hero */
+  var eyebrow = document.querySelector('.hero-eyebrow');
+  if(eyebrow) eyebrow.textContent = t('hero-eyebrow');
+  var heroTitle = document.querySelector('.hero-title');
+  if(heroTitle) heroTitle.innerHTML = t('hero-title-line1')+'<br><span class="line2">'+t('hero-title-em')+'</span><br><span class="line3">'+t('hero-title-line3')+'</span>';
+  var heroSub = document.querySelector('.hero-sub');
+  if(heroSub) heroSub.textContent = t('hero-sub');
+  var btns = document.querySelectorAll('.hero-btns button');
+  if(btns[0]) btns[0].textContent = t('btn-explore');
+  if(btns[1]) btns[1].textContent = t('btn-find');
+
+  /* about */
+  var aboutLabel = document.querySelector('.about-text .section-label');
+  if(aboutLabel) aboutLabel.textContent = t('about-label');
+  var aboutTitle = document.querySelector('.about-text .section-title');
+  if(aboutTitle) aboutTitle.innerHTML = t('about-title')+'<br><em>'+t('about-title-em')+'</em>';
+  var aboutP = document.querySelector('.about-text p');
+  if(aboutP) aboutP.textContent = t('about-text');
+  var statLabels = document.querySelectorAll('.stat-label');
+  var slKeys = ['stat-label-1','stat-label-2','stat-label-3','stat-label-4'];
+  statLabels.forEach(function(el,i){ if(slKeys[i]) el.textContent=t(slKeys[i]); });
+
+  /* featured products */
+  var featuredTitle = document.querySelector('.featured-header h2');
+  if(featuredTitle) featuredTitle.textContent = t('featured-title');
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  var tabKeys = ['tab-women','tab-men','tab-sets'];
+  tabBtns.forEach(function(b,i){ if(tabKeys[i]) b.textContent=t(tabKeys[i]); });
+  var linkAll = document.querySelector('.link-all');
+  if(linkAll){
+    linkAll.innerHTML = t('view-all')+' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  }
+  document.querySelectorAll('.overlay-btn').forEach(function(b){ b.textContent=t('add-to-cart'); });
+  document.querySelectorAll('.prod-badge-new').forEach(function(b){ b.textContent=t('badge-new'); });
+
+  /* oils section */
+  var oilsTitle = document.querySelector('.oils-section .section-head h2');
+  if(oilsTitle) oilsTitle.textContent = t('oils-title');
+  var oilsSub = document.querySelector('.section-sub');
+  if(oilsSub) oilsSub.textContent = t('oils-sub');
+  document.querySelectorAll('.oil-notes').forEach(function(n){ n.textContent=t('oil-notes-default'); });
+  var seeAll = document.querySelector('.btn-see-all');
+  if(seeAll) seeAll.innerHTML = t('see-all-btn')+' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  document.querySelectorAll('.oil-tag').forEach(function(tag){
+    var txt = tag.textContent.trim();
+    if(txt==='Alcohol-Free'||txt==='Sans Alcool') tag.textContent=t('tag-alcohol-free');
+    else if(txt==='Best Seller'||txt==='Meilleures Ventes') tag.textContent=t('tag-best-seller');
+    else if(txt==='New'||txt==='Nouveau') tag.textContent=t('tag-new');
+    /* catalogue labels keep as-is */
+  });
+
+  /* catalogue */
+  var catTitle = document.querySelector('.cat-page-title');
+  if(catTitle) catTitle.textContent = t('cat-title');
+  var catSub = document.querySelector('.cat-page-sub');
+  if(catSub) catSub.textContent = t('cat-sub');
+  var catVC = el('catViewCart');
+  if(catVC) catVC.innerHTML = t('cat-view-cart')+' (<span id="catCartCount">'+el('catCartCount').textContent+'</span>)';
+  var catScount = el('catSearchCount');
+  if(catScount) catScount.textContent = t('cat-count-99');
+  var catBadges = document.querySelectorAll('.cat-count-badge');
+  if(catBadges[0]) catBadges[0].textContent = t('cat-count-50');
+  if(catBadges[1]) catBadges[1].textContent = t('cat-count-49');
+  var catFooterNote = document.querySelector('.cat-footer-note');
+  if(catFooterNote) catFooterNote.textContent = t('cat-footer-note');
+  var catWaBtn = el('btnWaOrderCat');
+  if(catWaBtn) catWaBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> '+t('cat-wa-btn');
+
+  /* testimonials */
+  var testiTitle = document.querySelector('.testi-section .section-head h2');
+  if(testiTitle) testiTitle.textContent = t('testi-title');
+  var testiTexts = document.querySelectorAll('.testi-text');
+  var testiKeys = ['testi-1','testi-2','testi-3'];
+  testiTexts.forEach(function(p,i){ if(testiKeys[i]) p.textContent=t(testiKeys[i]); });
+
+  /* wa section */
+  var waLabel = document.querySelector('.wa-section .eyebrow');
+  if(waLabel) waLabel.textContent = t('wa-label');
+  var waTitle = document.querySelector('.wa-section h2');
+  if(waTitle) waTitle.innerHTML = t('wa-title')+'<br><em>'+t('wa-title-em')+'</em>';
+  var waDesc = document.querySelector('.wa-section p');
+  if(waDesc) waDesc.textContent = t('wa-desc');
+  var waBtn = el('btnWaMain');
+  if(waBtn){
+    var svgWa = waBtn.querySelector('svg');
+    waBtn.innerHTML = (svgWa ? svgWa.outerHTML : '')+' '+t('wa-btn');
+  }
+  var waPulse = document.querySelector('.wa-pulse');
+  if(waPulse) waPulse.innerHTML = '<span class="wa-dot"></span>'+t('wa-status');
+
+  /* footer */
+  var footerDesc = document.querySelector('.footer-brand p');
+  if(footerDesc) footerDesc.textContent = t('footer-desc');
+  var footerCols = document.querySelectorAll('.footer-col');
+  if(footerCols[0]){
+    var h4 = footerCols[0].querySelector('h4');
+    if(h4) h4.textContent = t('footer-shop');
+    var lis = footerCols[0].querySelectorAll('li a');
+    var shopKeys = ['footer-edp','footer-oils','footer-oud','footer-floral','footer-gift','footer-limited'];
+    lis.forEach(function(a,i){ if(shopKeys[i]) a.textContent=t(shopKeys[i]); });
+  }
+  if(footerCols[1]){
+    var h4 = footerCols[1].querySelector('h4');
+    if(h4) h4.textContent = t('footer-help');
+    var lis = footerCols[1].querySelectorAll('li a');
+    var helpKeys = ['footer-guide','footer-shipping','footer-track','footer-faq','footer-contact'];
+    lis.forEach(function(a,i){ if(helpKeys[i]) a.textContent=t(helpKeys[i]); });
+  }
+  if(footerCols[2]){
+    var h4 = footerCols[2].querySelector('h4');
+    if(h4) h4.textContent = t('footer-company');
+    var lis = footerCols[2].querySelectorAll('li a');
+    var compKeys = ['footer-story','footer-craft','footer-sustain','footer-press','footer-careers'];
+    lis.forEach(function(a,i){ if(compKeys[i]) a.textContent=t(compKeys[i]); });
+  }
+  var footerCopy = document.querySelector('.footer-bottom p');
+  if(footerCopy) footerCopy.textContent = t('footer-copy');
+  var fbLinks = document.querySelectorAll('.footer-bottom-links a');
+  var fbKeys = ['footer-terms','footer-privacy','footer-ship','footer-policy'];
+  fbLinks.forEach(function(a,i){ if(fbKeys[i]) a.textContent=t(fbKeys[i]); });
+
+  /* cart drawer */
+  var cartTitle = document.querySelector('.cart-drawer-head h3');
+  if(cartTitle) cartTitle.textContent = t('cart-title');
+  var cartClear = document.querySelector('.cart-clear');
+  if(cartClear){
+    var svgEl = cartClear.querySelector('svg');
+    cartClear.innerHTML = (svgEl?svgEl.outerHTML:'')+' '+t('cart-clear');
+  }
+  var cartEmpty = el('cartEmpty');
+  if(cartEmpty){
+    var parts = t('cart-empty').split('\n');
+    cartEmpty.querySelector('p').innerHTML = parts[0]+'<br/>'+parts[1];
+  }
+  var cartWaBtn = el('btnWaOrder');
+  if(cartWaBtn){
+    var svgEl = cartWaBtn.querySelector('svg');
+    cartWaBtn.innerHTML = (svgEl?svgEl.outerHTML:'')+' '+t('cart-wa-btn');
+  }
+  var cartNote = document.querySelector('.cart-note');
+  if(cartNote) cartNote.textContent = t('cart-note');
+  var cartSubLabel = document.querySelector('.cart-total-label');
+  if(cartSubLabel) cartSubLabel.textContent = t('cart-subtotal');
+
+  /* search dropdown head placeholder */
+  var sdHead = el('searchDropdownHead');
+  if(sdHead && (sdHead.textContent==='Results'||sdHead.textContent==='Résultats')) sdHead.textContent=t('search-head-init');
+
+  /* expose current lang to other scripts */
+  window._auraLang = currentLang;
+}
+
+/* Override alert/confirm with translated text in cart/WA logic */
+window._auraT = t;
+
+/* Init on load */
+window.addEventListener('DOMContentLoaded', function(){
+  var saved = localStorage.getItem('aura-lang') || 'fr';
+  setLang(saved);
+});
+</script>
+
+<script>
+/* ── LAZY IMAGE LOADER ── */
+(function(){
+  if(!('IntersectionObserver' in window)) {
+    document.querySelectorAll('img[data-src]').forEach(function(img){
+      img.src = img.getAttribute('data-src');
+    });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var img = e.target;
+        img.src = img.getAttribute('data-src');
+        img.classList.add('loaded');
+        obs.unobserve(img);
+      }
+    });
+  }, {rootMargin:'200px'});
+  document.querySelectorAll('img[data-src]').forEach(function(img){ obs.observe(img); });
 })();
 </script>
 </body>
